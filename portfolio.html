@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex Rivera — Product Owner</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f0e8;
+    --cream: #ede8dc;
+    --gold: #c9a84c;
+    --rust: #b85c38;
+    --sage: #5a7a5a;
+    --muted: #7a7468;
+    --border: #d4cfc4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    cursor: crosshair;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 3rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(8px);
+    transition: box-shadow 0.3s;
+  }
+
+  .nav-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 3rem 5rem 5rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 2rem;
+    height: 1px;
+    background: var(--rust);
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    color: var(--muted);
+    max-width: 380px;
+    margin-bottom: 3rem;
+    font-size: 0.85rem;
+    line-height: 1.9;
+  }
+
+  .hero-ctas { display: flex; gap: 1rem; align-items: center; }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border: 1px solid var(--ink);
+  }
+
+  .btn-primary:hover { background: var(--rust); border-color: var(--rust); }
+
+  .btn-secondary {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.2s;
+  }
+
+  .btn-secondary:hover { gap: 1rem; }
+
+  .hero-right {
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-big-text {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(8rem, 18vw, 18rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--border);
+    position: absolute;
+    user-select: none;
+    letter-spacing: -0.05em;
+  }
+
+  .hero-stats {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 220px;
+  }
+
+  .stat-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    animation: floatCard 6s ease-in-out infinite;
+  }
+
+  .stat-card:nth-child(2) { animation-delay: -2s; margin-left: 2rem; }
+  .stat-card:nth-child(3) { animation-delay: -4s; margin-left: 1rem; }
+
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-num span { color: var(--rust); }
+  .stat-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+  .marquee-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 0;
+    overflow: hidden;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 25s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .marquee-item {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .marquee-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; }
+
+  section { padding: 6rem 5rem; }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::before { content: ''; width: 2rem; height: 1px; background: var(--rust); }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  h2 em { font-style: italic; font-weight: 300; color: var(--gold); }
+
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-text p { color: var(--muted); margin-bottom: 1.5rem; font-size: 0.875rem; line-height: 1.9; }
+
+  .about-skills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+
+  .skill-tag {
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .skill-tag:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .about-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .about-metric { background: var(--paper); padding: 2.5rem; text-align: center; }
+
+  .about-metric-num {
+    font-family: 'Fraunces', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-metric-num span { color: var(--gold); }
+  .about-metric-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+  #work { background: var(--paper); }
+
+  .work-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+
+  .case-studies {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .case-study {
+    background: var(--paper);
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto;
+    align-items: stretch;
+    transition: background 0.25s;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .case-study:hover { background: var(--ink); }
+  .case-study:hover .cs-num,
+  .case-study:hover .cs-title,
+  .case-study:hover .cs-arrow { color: var(--paper); }
+  .case-study:hover .cs-desc,
+  .case-study:hover .cs-tag,
+  .case-study:hover .cs-metric-label { color: rgba(245,240,232,0.5); }
+  .case-study:hover .cs-tag { border-color: rgba(245,240,232,0.2); }
+  .case-study:hover .cs-num-border,
+  .case-study:hover .cs-metrics { border-color: rgba(245,240,232,0.12); }
+  .case-study:hover .cs-metric-num { color: var(--paper); }
+  .case-study:hover .cs-metric-num span { color: var(--gold); }
+
+  .cs-num-border {
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.25s;
+  }
+
+  .cs-num {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--border);
+    transition: color 0.25s;
+  }
+
+  .cs-content { padding: 2.5rem; }
+
+  .cs-tags { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+
+  .cs-tag {
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: all 0.25s;
+  }
+
+  .cs-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+    transition: color 0.25s;
+  }
+
+  .cs-desc { font-size: 0.8rem; color: var(--muted); max-width: 600px; line-height: 1.8; transition: color 0.25s; }
+
+  .cs-metrics {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--border);
+    transition: border-color 0.25s;
+    min-width: 180px;
+  }
+
+  .cs-metric {
+    padding: 1.5rem 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.25s;
+  }
+
+  .cs-metric:last-child { border-bottom: none; }
+
+  .cs-metric-num {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+    transition: color 0.25s;
+  }
+
+  .cs-metric-num span { color: var(--rust); }
+  .cs-metric-label { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); transition: color 0.25s; }
+
+  .cs-arrow { padding: 2rem; display: flex; align-items: center; color: var(--muted); font-size: 1.5rem; transition: color 0.25s; }
+
+  #artifacts { background: var(--cream); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+  .artifacts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+
+  .artifact-card {
+    background: var(--paper);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .artifact-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .artifact-card:hover::after { transform: scaleX(1); }
+
+  .artifact-icon {
+    width: 44px; height: 44px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .artifact-title { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .artifact-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.8; }
+
+  #tools { background: var(--ink); color: var(--paper); }
+  #tools .section-label { color: var(--gold); }
+  #tools .section-label::before { background: var(--gold); }
+  #tools h2 { color: var(--paper); }
+  #tools h2 em { color: var(--gold); }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    margin-top: 3rem;
+  }
+
+  .tool-group { background: var(--ink); padding: 2rem; }
+
+  .tool-group-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .tool-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .tool-list li {
+    font-size: 0.78rem;
+    color: rgba(245,240,232,0.65);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+  }
+
+  .tool-list li::before { content: ''; width: 4px; height: 4px; background: var(--rust); border-radius: 50%; flex-shrink: 0; }
+  .tool-list li:hover { color: var(--paper); }
+
+  #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; border-top: 1px solid var(--border); }
+
+  .contact-left h2 { margin-bottom: 1.5rem; }
+  .contact-left p { color: var(--muted); font-size: 0.85rem; line-height: 1.9; margin-bottom: 2.5rem; }
+
+  .contact-links { display: flex; flex-direction: column; border: 1px solid var(--border); }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.5rem;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+
+  .contact-link:last-child { border-bottom: none; }
+  .contact-link:hover { background: var(--ink); color: var(--paper); padding-left: 2rem; }
+
+  .contact-right { background: var(--cream); border: 1px solid var(--border); padding: 3rem; }
+
+  .contact-form-title { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 2rem; }
+
+  .form-field { margin-bottom: 1.5rem; }
+
+  .form-label { display: block; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+
+  .form-input {
+    width: 100%;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 0.85rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .form-input:focus { border-color: var(--ink); }
+  textarea.form-input { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .form-submit:hover { background: var(--rust); }
+
+  footer {
+    padding: 2rem 5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.05em; }
+
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: none; }
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    section, #about, #contact { padding: 4rem 1.5rem; gap: 3rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 4rem 1.5rem; }
+    #about { grid-template-columns: 1fr; }
+    #contact { grid-template-columns: 1fr; }
+    .tools-grid { grid-template-columns: 1fr 1fr; }
+    .artifacts-grid { grid-template-columns: 1fr; }
+    .case-study { grid-template-columns: 1fr; }
+    .cs-num-border, .cs-metrics, .cs-arrow { display: none; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="#" class="nav-logo">Alex Rivera</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#artifacts">Artifacts</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Product Owner · 8 Years Experience</div>
+    <h1>Building<br><em>products</em><br>people love.</h1>
+    <p class="hero-desc">I bridge business strategy and engineering execution — turning ambiguous problems into clear roadmaps, and roadmaps into shipped features that move metrics.</p>
+    <div class="hero-ctas">
+      <a href="#work" class="btn-primary">View Case Studies</a>
+      <a href="#contact" class="btn-secondary">Get in Touch →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-big-text">PO</div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">24<span>+</span></div>
+        <div class="stat-label">Products Launched</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3<span>×</span></div>
+        <div class="stat-label">Revenue Growth Led</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">98<span>%</span></div>
+        <div class="stat-label">Stakeholder Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <div class="marquee-item"><div class="marquee-dot"></div>Product Strategy</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Backlog Grooming</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Roadmap Planning</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Stakeholder Management</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>User Research</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Agile / Scrum</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>OKR Frameworks</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>A/B Testing</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Go-to-Market</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Data Analytics</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Product Strategy</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Backlog Grooming</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Roadmap Planning</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Stakeholder Management</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>User Research</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Agile / Scrum</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>OKR Frameworks</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>A/B Testing</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Go-to-Market</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Data Analytics</div>
+  </div>
+</div>
+
+<section id="about">
+  <div class="about-text fade-up">
+    <div class="section-label">About Me</div>
+    <h2>Discovery<br>first. <em>Always.</em></h2>
+    <p>I'm a certified Product Owner with 8 years leading cross-functional teams across fintech, healthtech, and SaaS. My approach is rooted in deep user empathy — I don't build features, I solve problems.</p>
+    <p>From 0-to-1 product builds to scaling platforms to millions of users, I've learned that the best roadmaps are written in pencil. I thrive in ambiguity and ship with conviction.</p>
+    <div class="about-skills">
+      <span class="skill-tag">CSPO Certified</span>
+      <span class="skill-tag">PSPO II</span>
+      <span class="skill-tag">SAFe PO/PM</span>
+      <span class="skill-tag">Design Thinking</span>
+      <span class="skill-tag">JTBD</span>
+      <span class="skill-tag">OKRs</span>
+      <span class="skill-tag">Lean UX</span>
+      <span class="skill-tag">Data-Driven</span>
+    </div>
+  </div>
+  <div class="about-right fade-up stagger-2">
+    <div class="about-metric">
+      <div class="about-metric-num">8<span>+</span></div>
+      <div class="about-metric-label">Years in Product</div>
+    </div>
+    <div class="about-metric">
+      <div class="about-metric-num">4</div>
+      <div class="about-metric-label">Industries</div>
+    </div>
+    <div class="about-metric">
+      <div class="about-metric-num">12<span>M</span></div>
+      <div class="about-metric-label">Users Impacted</div>
+    </div>
+    <div class="about-metric">
+      <div class="about-metric-num">$<span>50</span>M</div>
+      <div class="about-metric-label">Revenue Influenced</div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="work-header fade-up">
+    <div>
+      <div class="section-label">Case Studies</div>
+      <h2>Selected <em>Work</em></h2>
+    </div>
+  </div>
+  <div class="case-studies fade-up stagger-1">
+    <div class="case-study">
+      <div class="cs-num-border"><div class="cs-num">01</div></div>
+      <div class="cs-content">
+        <div class="cs-tags"><span class="cs-tag">Fintech</span><span class="cs-tag">B2C</span><span class="cs-tag">Mobile</span></div>
+        <div class="cs-title">Payments Checkout Redesign</div>
+        <div class="cs-desc">Led end-to-end redesign of the checkout flow for a neobank serving 4M users. Drove discovery with 60+ user interviews, ran 12 A/B experiments, and coordinated delivery across 3 squads to cut drop-off by 34%.</div>
+      </div>
+      <div class="cs-metrics">
+        <div class="cs-metric"><div class="cs-metric-num">34<span>%</span></div><div class="cs-metric-label">Drop-off Reduced</div></div>
+        <div class="cs-metric"><div class="cs-metric-num">$<span>8M</span></div><div class="cs-metric-label">Annual Revenue Added</div></div>
+      </div>
+      <div class="cs-arrow">↗</div>
+    </div>
+
+    <div class="case-study">
+      <div class="cs-num-border"><div class="cs-num">02</div></div>
+      <div class="cs-content">
+        <div class="cs-tags"><span class="cs-tag">Healthtech</span><span class="cs-tag">B2B</span><span class="cs-tag">Platform</span></div>
+        <div class="cs-title">EHR Patient Portal — 0→1</div>
+        <div class="cs-desc">Owned full product lifecycle from ideation to launch of a patient-facing health records portal. Defined MVP scope, authored 200+ user stories, and shipped in 6 months — 2 months ahead of schedule.</div>
+      </div>
+      <div class="cs-metrics">
+        <div class="cs-metric"><div class="cs-metric-num">6<span>mo</span></div><div class="cs-metric-label">Time to Launch</div></div>
+        <div class="cs-metric"><div class="cs-metric-num">4.8<span>★</span></div><div class="cs-metric-label">App Store Rating</div></div>
+      </div>
+      <div class="cs-arrow">↗</div>
+    </div>
+
+    <div class="case-study">
+      <div class="cs-num-border"><div class="cs-num">03</div></div>
+      <div class="cs-content">
+        <div class="cs-tags"><span class="cs-tag">SaaS</span><span class="cs-tag">Enterprise</span><span class="cs-tag">Analytics</span></div>
+        <div class="cs-title">Self-Serve Analytics Dashboard</div>
+        <div class="cs-desc">Transformed a heavily CSM-dependent reporting flow into a fully self-serve analytics module. Reduced support tickets by 60% and unlocked a new $2M ARR tier with advanced reporting capabilities.</div>
+      </div>
+      <div class="cs-metrics">
+        <div class="cs-metric"><div class="cs-metric-num">60<span>%</span></div><div class="cs-metric-label">Support Ticket Drop</div></div>
+        <div class="cs-metric"><div class="cs-metric-num">$<span>2M</span></div><div class="cs-metric-label">New ARR Unlocked</div></div>
+      </div>
+      <div class="cs-arrow">↗</div>
+    </div>
+
+    <div class="case-study">
+      <div class="cs-num-border"><div class="cs-num">04</div></div>
+      <div class="cs-content">
+        <div class="cs-tags"><span class="cs-tag">E-commerce</span><span class="cs-tag">Personalization</span><span class="cs-tag">ML</span></div>
+        <div class="cs-title">AI Personalization Engine</div>
+        <div class="cs-desc">Partnered with ML engineers to define requirements for a recommendation engine. Wrote the product spec, managed experimentation cadence, and drove a 22% uplift in average order value within 90 days post-launch.</div>
+      </div>
+      <div class="cs-metrics">
+        <div class="cs-metric"><div class="cs-metric-num">22<span>%</span></div><div class="cs-metric-label">AOV Increase</div></div>
+        <div class="cs-metric"><div class="cs-metric-num">90<span>d</span></div><div class="cs-metric-label">Time to Impact</div></div>
+      </div>
+      <div class="cs-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<section id="artifacts">
+  <div class="fade-up">
+    <div class="section-label">Deliverables</div>
+    <h2>Product <em>Artifacts</em></h2>
+  </div>
+  <div class="artifacts-grid">
+    <div class="artifact-card fade-up stagger-1">
+      <div class="artifact-icon">🗺</div>
+      <div class="artifact-title">Product Roadmaps</div>
+      <div class="artifact-desc">Outcome-driven, theme-based roadmaps that balance near-term delivery with long-term vision. Built in Productboard and Aha! with stakeholder-ready views.</div>
+    </div>
+    <div class="artifact-card fade-up stagger-2">
+      <div class="artifact-icon">📋</div>
+      <div class="artifact-title">PRDs & User Stories</div>
+      <div class="artifact-desc">Detailed product requirement documents with clear acceptance criteria, edge cases, and non-functional requirements. Written for both engineering and business audiences.</div>
+    </div>
+    <div class="artifact-card fade-up stagger-3">
+      <div class="artifact-icon">🧑‍🤝‍🧑</div>
+      <div class="artifact-title">User Personas & JTBDs</div>
+      <div class="artifact-desc">Research-backed personas grounded in 100+ interviews and behavioral data. Paired with Jobs-to-be-Done frameworks for prioritization clarity.</div>
+    </div>
+    <div class="artifact-card fade-up stagger-1">
+      <div class="artifact-icon">📊</div>
+      <div class="artifact-title">Prioritization Frameworks</div>
+      <div class="artifact-desc">RICE, WSJF, MoSCoW scoring sheets and backlog management templates used to align teams and stakeholders around what to build next.</div>
+    </div>
+    <div class="artifact-card fade-up stagger-2">
+      <div class="artifact-icon">🔁</div>
+      <div class="artifact-title">Journey Maps</div>
+      <div class="artifact-desc">End-to-end customer journey maps highlighting pain points, opportunity areas, and emotional highs/lows across key product flows.</div>
+    </div>
+    <div class="artifact-card fade-up stagger-3">
+      <div class="artifact-icon">📈</div>
+      <div class="artifact-title">OKR & Metrics Dashboards</div>
+      <div class="artifact-desc">KPI trees, OKR scorecards, and product health dashboards built in Amplitude and Looker. Tied directly to quarterly planning cycles.</div>
+    </div>
+  </div>
+</section>
+
+<section id="tools">
+  <div class="fade-up">
+    <div class="section-label">Tech Stack</div>
+    <h2>My <em>Toolkit</em></h2>
+  </div>
+  <div class="tools-grid fade-up stagger-1">
+    <div class="tool-group">
+      <div class="tool-group-title">Backlog & Planning</div>
+      <ul class="tool-list">
+        <li>Jira</li><li>Azure DevOps</li><li>Linear</li><li>Notion</li><li>Confluence</li>
+      </ul>
+    </div>
+    <div class="tool-group">
+      <div class="tool-group-title">Roadmapping</div>
+      <ul class="tool-list">
+        <li>Productboard</li><li>Aha!</li><li>Roadmunk</li><li>Miro</li><li>FigJam</li>
+      </ul>
+    </div>
+    <div class="tool-group">
+      <div class="tool-group-title">Analytics</div>
+      <ul class="tool-list">
+        <li>Amplitude</li><li>Mixpanel</li><li>Google Analytics</li><li>Looker</li><li>Hotjar</li>
+      </ul>
+    </div>
+    <div class="tool-group">
+      <div class="tool-group-title">Research & Design</div>
+      <ul class="tool-list">
+        <li>Figma</li><li>UserTesting</li><li>Dovetail</li><li>Maze</li><li>Optimal Workshop</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-left fade-up">
+    <div class="section-label">Get In Touch</div>
+    <h2>Let's build<br>something <em>great.</em></h2>
+    <p>Open to full-time Product Owner roles, fractional engagements, and advisory positions. Based in San Francisco — open to remote globally.</p>
+    <div class="contact-links">
+      <a href="mailto:alex@example.com" class="contact-link"><span>alex@example.com</span><span>→</span></a>
+      <a href="#" class="contact-link"><span>linkedin.com/in/alexrivera</span><span>→</span></a>
+      <a href="#" class="contact-link"><span>Download Resume (PDF)</span><span>↓</span></a>
+    </div>
+  </div>
+  <div class="contact-right fade-up stagger-2">
+    <div class="contact-form-title">Send a message</div>
+    <div class="form-field">
+      <label class="form-label">Your Name</label>
+      <input type="text" class="form-input" placeholder="Jane Smith">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-input" placeholder="jane@company.com">
+    </div>
+    <div class="form-field">
+      <label class="form-label">Message</label>
+      <textarea class="form-input" rows="4" placeholder="Tell me about the opportunity..."></textarea>
+    </div>
+    <button class="form-submit">Send Message →</button>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Alex Rivera — Product Owner</p>
+  <p>Built with intention. Shipped with care.</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('main-nav');
+    nav.style.boxShadow = window.scrollY > 50 ? '0 2px 20px rgba(15,14,12,0.08)' : 'none';
+  });
+</script>
+</body>
+</html>
