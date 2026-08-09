@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --use-npm)",
+      "Bash(rm -rf /private/tmp/claude-502/-Users-riyakaran-Projects-Site/716e3a4f-cb35-434d-acf7-d34124f319c7/scratchpad/riya-site)",
+      "Bash(npx --yes create-next-app@latest /private/tmp/claude-502/-Users-riyakaran-Projects-Site/716e3a4f-cb35-434d-acf7-d34124f319c7/scratchpad/riya-site --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack --use-npm)",
+      "Bash(python3 -c ' *)"
+    ]
+  }
+}
