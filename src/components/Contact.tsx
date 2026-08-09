@@ -1,3 +1,4 @@
+import SectionHeading from "@/components/SectionHeading";
 import { profile } from "@/data/resume";
 
 export default function Contact() {
@@ -5,28 +6,19 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative overflow-hidden py-24 sm:py-32">
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[26rem] w-[40rem] -translate-x-1/2 animate-drift rounded-full bg-accent/15 blur-[130px]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-[26rem] w-[40rem] -translate-x-1/2 animate-drift rounded-full bg-periwinkle/15 blur-[130px]" />
 
       <div className="relative mx-auto max-w-6xl px-6 sm:px-8">
-        <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">
-          <span className="h-px w-8 bg-accent" />
-          Contact
-        </div>
-
-        <h2 className="mt-6 max-w-2xl font-display text-4xl font-bold leading-tight tracking-tight text-paper sm:text-6xl">
-          Let&apos;s build the next roadmap together.
-        </h2>
-
-        <p className="mt-6 max-w-xl text-base leading-relaxed text-paper-dim">
-          Open to product, program, and delivery leadership conversations. The fastest way to reach
-          me is email.
-        </p>
+        <SectionHeading
+          kicker="Contact"
+          title="Let's build the next roadmap together."
+          description="Open to product, program, and delivery leadership conversations. The fastest way to reach me is email."
+        />
 
         <div className="mt-10 flex flex-wrap gap-4">
           <a
             href={`mailto:${profile.email}`}
-            className="inline-flex items-center gap-2 bg-accent px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-ink transition-transform hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 rounded-full bg-coral-solid px-6 py-3 text-sm font-bold text-white shadow-clay transition-[transform,box-shadow] duration-300 ease-bounce hover:-translate-y-1 hover:shadow-clay-lg active:translate-y-0 active:shadow-clay-pressed"
           >
             {profile.email}
           </a>
@@ -34,20 +26,20 @@ export default function Contact() {
             href={profile.linkedin}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 border border-line-strong px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-paper transition-colors hover:border-accent hover:text-accent"
+            className="inline-flex items-center gap-2 rounded-full bg-surface px-6 py-3 text-sm font-bold text-ink shadow-clay-sm transition-[transform,box-shadow] duration-300 ease-bounce hover:-translate-y-0.5 hover:shadow-clay active:translate-y-0 active:shadow-clay-pressed"
           >
             LinkedIn ↗
           </a>
           <a
             href={profile.resumeFile}
             download
-            className="inline-flex items-center gap-2 border border-line-strong px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-paper transition-colors hover:border-accent hover:text-accent"
+            className="inline-flex items-center gap-2 rounded-full bg-surface px-6 py-3 text-sm font-bold text-ink shadow-clay-sm transition-[transform,box-shadow] duration-300 ease-bounce hover:-translate-y-0.5 hover:shadow-clay active:translate-y-0 active:shadow-clay-pressed"
           >
             Download Resume ↓
           </a>
         </div>
 
-        <div className="mt-24 flex flex-col gap-4 border-t border-line pt-8 font-mono text-xs uppercase tracking-[0.15em] text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-24 flex flex-col gap-2 border-t border-line-soft pt-8 text-xs font-semibold text-ink/50 sm:flex-row sm:items-center sm:justify-between">
           <span>
             © {year} {profile.name}. Built with Next.js.
           </span>

@@ -107,25 +107,25 @@ export default function DigitalTwinChat() {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close Digital Twin chat" : "Chat with Digital Twin"}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 border border-accent/60 bg-ink px-5 py-3 font-mono text-xs uppercase tracking-[0.15em] text-accent shadow-[0_0_30px_rgba(214,255,63,0.25)] transition-transform hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(214,255,63,0.4)]"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-coral-solid px-6 py-4 text-sm font-bold text-white shadow-clay-lg transition-[transform,box-shadow] duration-300 ease-bounce hover:-translate-y-1 active:translate-y-0 active:shadow-clay-pressed"
       >
         {!open && (
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
           </span>
         )}
         {open ? "Close" : "Chat with my Digital Twin"}
       </button>
 
       {open && (
-        <div className="fixed inset-x-4 bottom-24 top-auto z-50 flex h-[70vh] max-h-[560px] flex-col border border-line bg-ink-card shadow-2xl sm:inset-x-auto sm:right-6 sm:w-[400px]">
-          <div className="flex items-center justify-between border-b border-line bg-ink-raised px-5 py-4">
+        <div className="reveal fixed inset-x-4 bottom-24 top-auto z-50 flex h-[70vh] max-h-[560px] flex-col overflow-hidden rounded-3xl bg-surface shadow-clay-lg sm:inset-x-auto sm:right-6 sm:w-[400px]">
+          <div className="flex items-center justify-between rounded-t-3xl bg-surface-dim px-5 py-4">
             <div>
-              <p className="font-display text-sm font-bold text-paper">
+              <p className="font-display text-sm font-bold text-ink">
                 {profile.name}&apos;s Digital Twin
               </p>
-              <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
+              <p className="text-[11px] font-semibold text-muted">
                 AI · grounded in her real resume
               </p>
             </div>
@@ -133,7 +133,7 @@ export default function DigitalTwinChat() {
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close"
-              className="text-paper-dim transition-colors hover:text-accent"
+              className="rounded-full bg-surface p-2 text-ink shadow-clay-sm transition-colors hover:text-coral-text"
             >
               ✕
             </button>
@@ -142,7 +142,7 @@ export default function DigitalTwinChat() {
           <div ref={scrollRef} className="flex-1 space-y-4 overflow-y-auto px-5 py-5">
             {messages.length === 0 && (
               <div className="space-y-4">
-                <p className="text-sm leading-relaxed text-paper-dim">
+                <p className="text-sm leading-relaxed text-muted">
                   Ask me anything about my roadmaps, my delivery track record, or how I work with
                   AI day to day — I&apos;ll answer as if I were {profile.name}.
                 </p>
@@ -152,7 +152,7 @@ export default function DigitalTwinChat() {
                       key={s}
                       type="button"
                       onClick={() => sendMessage(s)}
-                      className="border border-line-strong px-3 py-2 text-left text-xs text-paper-dim transition-colors hover:border-accent hover:text-paper"
+                      className="rounded-2xl bg-surface-dim px-3 py-2.5 text-left text-xs font-semibold text-ink shadow-clay-sm transition-colors duration-300 hover:bg-periwinkle/15 hover:text-periwinkle-text"
                     >
                       {s}
                     </button>
@@ -167,12 +167,12 @@ export default function DigitalTwinChat() {
                 className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] whitespace-pre-wrap px-4 py-3 text-sm leading-relaxed ${
+                  className={`max-w-[85%] whitespace-pre-wrap px-4 py-3 text-sm leading-relaxed shadow-clay-sm ${
                     m.role === "user"
-                      ? "bg-accent text-ink"
+                      ? "rounded-3xl rounded-br-md bg-coral-solid text-white"
                       : m.isError
-                        ? "border border-line-strong text-muted"
-                        : "border border-line bg-ink-raised text-paper"
+                        ? "rounded-3xl rounded-bl-md bg-surface-dim text-muted"
+                        : "rounded-3xl rounded-bl-md bg-surface-dim text-ink"
                   }`}
                 >
                   {m.content || (
@@ -192,7 +192,7 @@ export default function DigitalTwinChat() {
               e.preventDefault();
               sendMessage(input);
             }}
-            className="flex items-center gap-2 border-t border-line p-3"
+            className="flex items-center gap-2 rounded-b-3xl bg-surface-dim p-3"
           >
             <input
               ref={inputRef}
@@ -201,12 +201,13 @@ export default function DigitalTwinChat() {
               placeholder="Ask about her career..."
               disabled={streaming}
               maxLength={2000}
-              className="flex-1 border border-line-strong bg-ink px-3 py-2 text-sm text-paper placeholder:text-muted focus:border-accent focus:outline-none disabled:opacity-50"
+              className="flex-1 rounded-full bg-surface px-4 py-2.5 text-sm text-ink shadow-clay-sm placeholder:text-muted focus:shadow-clay focus:outline-none disabled:opacity-50"
             />
             <button
               type="submit"
               disabled={streaming || !input.trim()}
-              className="border border-line-strong px-4 py-2 font-mono text-xs uppercase tracking-[0.15em] text-paper transition-colors hover:border-accent hover:text-accent disabled:opacity-30 disabled:hover:border-line-strong disabled:hover:text-paper"
+              aria-label="Send"
+              className="rounded-full bg-coral-solid p-3 text-white shadow-clay-sm transition-[transform,box-shadow] duration-300 ease-bounce hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-40 disabled:shadow-none disabled:hover:translate-y-0"
             >
               Send
             </button>

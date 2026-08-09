@@ -11,56 +11,66 @@ const marqueeItems = [
 
 export default function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden border-b border-line pt-32 pb-20 sm:pt-40 sm:pb-28">
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
-      <div className="pointer-events-none absolute inset-0 bg-noise" />
-      <div className="pointer-events-none absolute -top-32 right-[-10%] h-[32rem] w-[32rem] animate-drift rounded-full bg-accent/20 blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-[-10%] left-[-10%] h-[26rem] w-[26rem] animate-drift rounded-full bg-accent-2/25 blur-[120px] [animation-delay:-9s]" />
+    <section id="top" className="relative overflow-hidden pt-36 pb-20 sm:pt-44 sm:pb-28">
+      <div className="pointer-events-none absolute -top-32 right-[-10%] h-[32rem] w-[32rem] animate-drift rounded-full bg-coral/25 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-[-10%] left-[-10%] h-[26rem] w-[26rem] animate-drift rounded-full bg-periwinkle/25 blur-[120px] [animation-delay:-9s]" />
 
-      <div className="relative mx-auto max-w-6xl px-6 sm:px-8">
-        <div className="reveal flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-          </span>
-          Open to new opportunities · {profile.location}
+      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div>
+          <div className="reveal inline-flex items-center gap-2 rounded-full bg-surface px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-coral-text shadow-clay-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-coral opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-coral-solid" />
+            </span>
+            Open to new opportunities · {profile.location}
+          </div>
+
+          <h1 className="reveal mt-8 max-w-xl font-display text-5xl font-bold leading-[1.05] tracking-tight text-ink sm:text-6xl [animation-delay:80ms]">
+            Turning ambiguity into{" "}
+            <span className="relative inline-block text-coral-text">
+              <span className="absolute inset-x-0 bottom-1 -z-10 h-3 rounded-full bg-periwinkle/30" />
+              shipped roadmaps
+            </span>
+            .
+          </h1>
+
+          <p className="reveal mt-8 max-w-xl text-lg leading-relaxed text-ink/70 [animation-delay:160ms]">
+            I&apos;m {profile.name}, a {profile.role} building enterprise platforms where
+            engineering, business, and AI actually meet in the backlog.
+          </p>
+
+          <div className="reveal mt-10 flex flex-wrap items-center gap-4 [animation-delay:240ms]">
+            <a
+              href="#journey"
+              className="inline-flex items-center gap-2 rounded-full bg-coral-solid px-6 py-3 text-sm font-bold text-white shadow-clay transition-[transform,box-shadow] duration-300 ease-bounce hover:-translate-y-1 hover:shadow-clay-lg active:translate-y-0 active:shadow-clay-pressed"
+            >
+              See my journey →
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full bg-surface px-6 py-3 text-sm font-bold text-ink shadow-clay-sm transition-[transform,box-shadow] duration-300 ease-bounce hover:-translate-y-0.5 hover:shadow-clay active:translate-y-0 active:shadow-clay-pressed"
+            >
+              Get in touch
+            </a>
+          </div>
         </div>
 
-        <h1 className="reveal mt-8 max-w-4xl font-display text-5xl font-bold leading-[1.02] tracking-tight text-paper sm:text-7xl [animation-delay:80ms]">
-          Turning ambiguity into <span className="text-glow text-accent">shipped roadmaps</span>.
-        </h1>
-
-        <p className="reveal mt-8 max-w-2xl text-lg leading-relaxed text-paper-dim [animation-delay:160ms]">
-          I&apos;m {profile.name}, a {profile.role} building enterprise platforms where
-          engineering, business, and AI actually meet in the backlog.
-        </p>
-
-        <div className="reveal mt-10 flex flex-wrap items-center gap-4 [animation-delay:240ms]">
-          <a
-            href="#journey"
-            className="inline-flex items-center gap-2 bg-accent px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-ink transition-transform hover:-translate-y-0.5"
-          >
-            See my journey →
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 border border-line-strong px-6 py-3 font-mono text-xs uppercase tracking-[0.15em] text-paper transition-colors hover:border-accent hover:text-accent"
-          >
-            Get in touch
-          </a>
+        <div className="reveal relative mx-auto aspect-square w-full max-w-md [animation-delay:200ms]">
+          {/* future: rotating 3D photo element goes here */}
+          <div className="h-full w-full rounded-full bg-surface shadow-clay-lg" />
         </div>
       </div>
 
-      <div className="relative mt-20 border-y border-line bg-ink-raised/60 py-4">
-        <div className="flex overflow-hidden">
-          <div className="flex w-max shrink-0 animate-marquee items-center gap-10 pr-10 font-mono text-sm uppercase tracking-[0.2em] text-muted">
-            {[...marqueeItems, ...marqueeItems].map((item, i) => (
-              <span key={i} className="flex items-center gap-10">
-                {item}
-                <span className="text-accent">/</span>
-              </span>
-            ))}
-          </div>
+      <div className="relative mx-auto mt-16 max-w-6xl px-6 sm:px-8">
+        <div className="flex flex-wrap justify-center gap-3 rounded-3xl bg-surface/60 p-6 shadow-clay-sm">
+          {marqueeItems.map((item) => (
+            <span
+              key={item}
+              className="rounded-full bg-surface px-4 py-2 text-sm font-semibold text-ink shadow-clay-sm"
+            >
+              {item}
+            </span>
+          ))}
         </div>
       </div>
     </section>
