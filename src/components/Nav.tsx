@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Download, Menu, X } from "lucide-react";
 import { nav, profile } from "@/data/resume";
 
 export default function Nav() {
@@ -17,20 +18,20 @@ export default function Nav() {
   return (
     <header className="fixed inset-x-4 top-4 z-50 sm:inset-x-8 sm:top-6">
       <nav
-        className={`mx-auto flex max-w-6xl items-center justify-between rounded-full bg-surface/90 px-6 py-3 backdrop-blur-md transition-shadow duration-300 ${
-          scrolled ? "shadow-clay-lg" : "shadow-clay"
+        className={`mx-auto flex max-w-6xl items-center justify-between rounded-full bg-surface px-6 py-3 transition-shadow duration-200 ${
+          scrolled ? "shadow-lift" : "shadow-rest"
         }`}
       >
-        <a href="#top" className="font-display text-lg font-bold text-ink">
-          Riya<span className="text-coral-text">.</span>Karan
+        <a href="#top" className="font-display text-lg font-bold text-neutral-900">
+          Riya<span className="text-accent">.</span>Karan
         </a>
 
-        <ul className="hidden items-center gap-1 text-sm font-semibold text-ink/70 md:flex">
+        <ul className="hidden items-center gap-1 text-sm font-semibold text-neutral-600 md:flex">
           {nav.map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}
-                className="block rounded-full px-3 py-1.5 transition-colors duration-300 hover:bg-surface-dim hover:text-coral-text"
+                className="block rounded-full px-3 py-3 transition-colors duration-150 hover:bg-neutral-100 hover:text-accent"
               >
                 {item.label}
               </a>
@@ -42,38 +43,33 @@ export default function Nav() {
           <a
             href={profile.resumeFile}
             download
-            className="group inline-flex items-center gap-2 rounded-full bg-coral-solid px-5 py-2.5 text-sm font-bold text-white shadow-clay-sm transition-[transform,box-shadow] duration-300 ease-bounce hover:-translate-y-0.5 hover:shadow-clay active:translate-y-0 active:shadow-clay-pressed"
+            className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-bold text-white shadow-rest transition-[transform,box-shadow] duration-200 ease-standard hover:-translate-y-0.5 hover:shadow-lift active:translate-y-0"
           >
             Resume
-            <span className="transition-transform group-hover:translate-y-0.5">↓</span>
+            <Download className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden="true" />
           </a>
         </div>
 
         <button
           type="button"
-          aria-label="Toggle menu"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex flex-col gap-1.5 rounded-full bg-surface-dim p-2.5 shadow-clay-sm md:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-full bg-neutral-100 text-neutral-900 md:hidden"
         >
-          <span
-            className={`h-0.5 w-5 rounded-full bg-ink transition-transform ${open ? "translate-y-2 rotate-45" : ""}`}
-          />
-          <span className={`h-0.5 w-5 rounded-full bg-ink transition-opacity ${open ? "opacity-0" : ""}`} />
-          <span
-            className={`h-0.5 w-5 rounded-full bg-ink transition-transform ${open ? "-translate-y-2 -rotate-45" : ""}`}
-          />
+          {open ? <X className="h-5 w-5" strokeWidth={2} /> : <Menu className="h-5 w-5" strokeWidth={2} />}
         </button>
       </nav>
 
       {open ? (
-        <div className="mx-auto mt-3 max-w-6xl rounded-3xl bg-surface p-6 shadow-clay-lg md:hidden">
-          <ul className="flex flex-col gap-2 text-base font-semibold text-ink/70">
+        <div className="mx-auto mt-3 max-w-6xl rounded-2xl bg-surface p-6 shadow-lift md:hidden">
+          <ul className="flex flex-col gap-1 text-base font-semibold text-neutral-600">
             {nav.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-2xl px-4 py-3 transition-colors hover:bg-surface-dim hover:text-coral-text"
+                  className="block rounded-2xl px-4 py-3 transition-colors duration-150 hover:bg-neutral-100 hover:text-accent"
                 >
                   {item.label}
                 </a>
@@ -83,10 +79,11 @@ export default function Nav() {
               <a
                 href={profile.resumeFile}
                 download
-                className="mt-2 block rounded-2xl bg-coral-solid px-4 py-3 text-center font-bold text-white shadow-clay-sm"
+                className="mt-2 flex items-center justify-center gap-2 rounded-full bg-accent px-4 py-3 font-bold text-white"
                 onClick={() => setOpen(false)}
               >
-                Download Resume ↓
+                Download Resume
+                <Download className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden="true" />
               </a>
             </li>
           </ul>

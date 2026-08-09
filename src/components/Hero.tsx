@@ -1,6 +1,8 @@
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { profile } from "@/data/resume";
 
-const marqueeItems = [
+const skillTags = [
   "Product Strategy",
   "Agile Delivery",
   "AI-Augmented PM",
@@ -11,62 +13,66 @@ const marqueeItems = [
 
 export default function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden pt-36 pb-20 sm:pt-44 sm:pb-28">
-      <div className="pointer-events-none absolute -top-32 right-[-10%] h-[32rem] w-[32rem] animate-drift rounded-full bg-coral/25 blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-[-10%] left-[-10%] h-[26rem] w-[26rem] animate-drift rounded-full bg-periwinkle/25 blur-[120px] [animation-delay:-9s]" />
-
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+    <section id="top" className="pt-32 pb-24">
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div>
-          <div className="reveal inline-flex items-center gap-2 rounded-full bg-surface px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-coral-text shadow-clay-sm">
+          <div className="reveal inline-flex items-center gap-2 rounded-full bg-surface px-4 py-2 text-xs font-bold uppercase tracking-wide text-accent shadow-rest">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-coral opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-coral-solid" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
             Open to new opportunities · {profile.location}
           </div>
 
-          <h1 className="reveal mt-8 max-w-xl font-display text-5xl font-bold leading-[1.05] tracking-tight text-ink sm:text-6xl [animation-delay:80ms]">
+          <h1 className="reveal delay-75 mt-8 max-w-xl font-display text-4xl font-bold text-neutral-900 sm:text-6xl">
             Turning ambiguity into{" "}
-            <span className="relative inline-block text-coral-text">
-              <span className="absolute inset-x-0 bottom-1 -z-10 h-3 rounded-full bg-periwinkle/30" />
+            <span className="relative inline-block text-accent">
+              <span className="absolute inset-x-0 bottom-1 -z-10 h-3 rounded-full bg-accent/15" />
               shipped roadmaps
             </span>
             .
           </h1>
 
-          <p className="reveal mt-8 max-w-xl text-lg leading-relaxed text-ink/70 [animation-delay:160ms]">
+          <p className="reveal delay-150 mt-8 max-w-prose text-lg text-neutral-600">
             I&apos;m {profile.name}, a {profile.role} building enterprise platforms where
             engineering, business, and AI actually meet in the backlog.
           </p>
 
-          <div className="reveal mt-10 flex flex-wrap items-center gap-4 [animation-delay:240ms]">
+          <div className="reveal delay-200 mt-10 flex flex-wrap items-center gap-4">
             <a
               href="#journey"
-              className="inline-flex items-center gap-2 rounded-full bg-coral-solid px-6 py-3 text-sm font-bold text-white shadow-clay transition-[transform,box-shadow] duration-300 ease-bounce hover:-translate-y-1 hover:shadow-clay-lg active:translate-y-0 active:shadow-clay-pressed"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-bold text-white shadow-rest transition-[transform,box-shadow] duration-200 ease-standard hover:-translate-y-0.5 hover:shadow-lift active:translate-y-0"
             >
-              See my journey →
+              See my journey
+              <ArrowRight className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden="true" />
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-surface px-6 py-3 text-sm font-bold text-ink shadow-clay-sm transition-[transform,box-shadow] duration-300 ease-bounce hover:-translate-y-0.5 hover:shadow-clay active:translate-y-0 active:shadow-clay-pressed"
+              className="inline-flex items-center gap-2 rounded-full bg-surface px-6 py-3 text-sm font-bold text-neutral-900 shadow-rest transition-[transform,box-shadow] duration-200 ease-standard hover:-translate-y-0.5 hover:shadow-lift active:translate-y-0"
             >
               Get in touch
             </a>
           </div>
         </div>
 
-        <div className="reveal relative mx-auto aspect-square w-full max-w-md [animation-delay:200ms]">
-          {/* future: rotating 3D photo element goes here */}
-          <div className="h-full w-full rounded-full bg-surface shadow-clay-lg" />
+        <div className="reveal delay-150 relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-full shadow-lift">
+          <Image
+            src="/riya-photo.jpg"
+            alt={`${profile.name} smiling on a balcony overlooking Bangalore`}
+            fill
+            priority
+            sizes="(max-width: 1024px) 60vw, 448px"
+            className="object-cover"
+          />
         </div>
       </div>
 
-      <div className="relative mx-auto mt-16 max-w-6xl px-6 sm:px-8">
-        <div className="flex flex-wrap justify-center gap-3 rounded-3xl bg-surface/60 p-6 shadow-clay-sm">
-          {marqueeItems.map((item) => (
+      <div className="mx-auto mt-16 max-w-6xl px-6 sm:px-8">
+        <div className="flex flex-wrap justify-center gap-2 rounded-2xl bg-neutral-100 p-6">
+          {skillTags.map((item) => (
             <span
               key={item}
-              className="rounded-full bg-surface px-4 py-2 text-sm font-semibold text-ink shadow-clay-sm"
+              className="rounded-full border border-neutral-200 bg-surface px-4 py-2 text-sm font-semibold text-neutral-700"
             >
               {item}
             </span>

@@ -3,7 +3,7 @@ import { experience } from "@/data/resume";
 
 export default function Journey() {
   return (
-    <section id="journey" className="py-24 sm:py-32">
+    <section id="journey" className="bg-neutral-100 py-24">
       <div className="mx-auto max-w-6xl px-6 sm:px-8">
         <SectionHeading
           kicker="Career Journey"
@@ -11,51 +11,54 @@ export default function Journey() {
           description="From backend delivery on payments infrastructure to owning the most critical module on an enterprise mobility platform — here's the path."
         />
 
-        <ol className="relative mt-16">
-          <div className="pointer-events-none absolute left-0 top-2 bottom-2 w-1.5 rounded-full bg-white/70 shadow-[inset_1px_1px_4px_rgba(46,42,61,0.18)]" />
+        <div className="relative mt-16">
+          <div className="absolute left-0 top-2 bottom-2 w-1 rounded-full bg-neutral-200" />
 
-          {experience.map((role, i) => (
-            <li key={`${role.title}-${role.start}`} className="relative pb-8 pl-10 last:pb-0 sm:pl-14">
-              <span
-                className={`absolute -left-[9px] top-1 h-6 w-6 rounded-full shadow-clay-sm ${
-                  role.current ? "bg-coral-solid" : "bg-periwinkle/40"
-                }`}
-              >
-                {role.current && (
-                  <span className="absolute inset-0 animate-ping rounded-full bg-coral opacity-60" />
-                )}
-              </span>
+          <ol>
+            {experience.map((role, i) => (
+              <li key={`${role.title}-${role.start}`} className="relative pb-6 pl-10 last:pb-0 sm:pl-14">
+                <span
+                  className={`absolute -left-2 top-1 h-5 w-5 rounded-full border-4 border-neutral-100 ${
+                    role.current ? "bg-accent" : "bg-neutral-300"
+                  }`}
+                >
+                  {role.current && (
+                    <span className="absolute inset-0 animate-ping rounded-full bg-accent opacity-60" />
+                  )}
+                </span>
 
-              <span className="absolute -left-14 top-0 hidden font-display text-4xl font-bold text-periwinkle/15 sm:block">
-                {String(i + 1).padStart(2, "0")}
-              </span>
+                <span
+                  aria-hidden="true"
+                  className="absolute -left-14 top-0 hidden font-display text-5xl font-bold text-neutral-200 sm:block"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
 
-              <div className="relative rounded-3xl bg-surface p-6 shadow-clay-sm transition-[transform,box-shadow] duration-300 ease-bounce hover:-translate-y-1 hover:shadow-clay sm:p-8">
-                <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-                  <h3 className="font-display text-xl font-bold text-ink sm:text-2xl">
-                    {role.title}
-                  </h3>
-                  <span className="rounded-full bg-periwinkle/15 px-3 py-1 text-xs font-bold text-periwinkle-text">
-                    {role.start} — {role.end}
-                  </span>
+                <div className="relative rounded-2xl bg-surface p-6 shadow-rest sm:p-8">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+                    <h3 className="font-display text-2xl font-bold text-neutral-900">{role.title}</h3>
+                    <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-600">
+                      {role.start} — {role.end}
+                    </span>
+                  </div>
+
+                  <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-neutral-600">
+                    {role.company} · {role.context}
+                  </p>
+
+                  <ul className="mt-5 space-y-3">
+                    {role.highlights.map((point) => (
+                      <li key={point} className="flex gap-3 text-sm text-neutral-600">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-
-                <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-muted">
-                  {role.company} · {role.context}
-                </p>
-
-                <ul className="mt-5 space-y-3">
-                  {role.highlights.map((point) => (
-                    <li key={point} className="flex gap-3 text-sm leading-relaxed text-muted">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-coral" />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </li>
-          ))}
-        </ol>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </section>
   );
