@@ -1,5 +1,6 @@
 import About from "@/components/About";
 import Contact from "@/components/Contact";
+import DigitalTwinChat from "@/components/DigitalTwinChat";
 import Hero from "@/components/Hero";
 import Journey from "@/components/Journey";
 import Nav from "@/components/Nav";
@@ -18,6 +19,7 @@ export default function Home() {
         <Portfolio />
         <Contact />
       </main>
+      <DigitalTwinChat />
     </>
   );
 }
